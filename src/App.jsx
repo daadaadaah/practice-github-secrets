@@ -19,7 +19,7 @@ export default function App() {
     <>
       <h1>
         Gihtub 로그인 테스트
-        -/
+        -/-
         {process.env.FIREBASE_PROJECT_ID}
         /
       </h1>
