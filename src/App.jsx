@@ -25,12 +25,12 @@ export default function App() {
         {accessToken || ''}
       </h1>
       <h1>
-        유저 ID :
+        ID :
         {' '}
         {userInfo ? userInfo.id : '' }
       </h1>
       <h1>
-        유저 email :
+        email :
         {' '}
         {userInfo ? userInfo.img : '' }
       </h1>
