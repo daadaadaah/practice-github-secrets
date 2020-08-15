@@ -24,7 +24,7 @@ export default function App() {
         /
       </h1>
       <h1>
-        토큰 :
+        Token :
         {' '}
 
         {accessToken || ''}
