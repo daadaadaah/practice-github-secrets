@@ -30,7 +30,7 @@ export default function App() {
         {userInfo ? userInfo.id : '' }
       </h1>
       <h1>
-        email :
+        프로필 사진 URL :
         {' '}
         {userInfo ? userInfo.img : '' }
       </h1>
