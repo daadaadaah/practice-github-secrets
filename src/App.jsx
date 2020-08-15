@@ -17,7 +17,12 @@ export default function App() {
 
   return (
     <>
-      <h1>Gihtub 로그인 테스트</h1>
+      <h1>
+        Gihtub 로그인 테스트
+        -/
+        {process.env.FIREBASE_PROJECT_ID}
+        /
+      </h1>
       <h1>
         토큰 :
         {' '}
