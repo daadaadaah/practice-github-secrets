@@ -2,11 +2,21 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { login } from './common/slice';
+import { login, setAccessToken, logout } from './common/slice';
+
+import { loadItem } from './services/storage/localStorage';
+
 import { get } from './common/utils';
 
 export default function App() {
   const dispatch = useDispatch();
+
+  const localToken = loadItem('accessToken');
+
+  if (localToken) {
+    // TODO : Token에 해당하는 유저 정보 DB에서 가져와서 자동 로그인시키기
+    dispatch(setAccessToken(localToken));
+  }
 
   const accessToken = useSelector(get('accessToken'));
   const userInfo = useSelector(get('userInfo'));
@@ -15,13 +25,14 @@ export default function App() {
     dispatch(login());
   };
 
+  const handleClickLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <>
       <h1>
         Gihtub 로그인 테스트
-        -/-
-        {process.env.FIREBASE_PROJECT_ID}
-        /
       </h1>
       <h1>
         Token :
@@ -39,7 +50,9 @@ export default function App() {
         {' '}
         {userInfo ? userInfo.img : '' }
       </h1>
-      <button type="button" onClick={handleClickLogin}>Login</button>
+      {accessToken
+        ? <button type="button" onClick={handleClickLogout}>Logout</button>
+        : <button type="button" onClick={handleClickLogin}>Login</button>}
 
     </>
   );

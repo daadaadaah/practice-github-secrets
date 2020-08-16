@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { githubOAuthLogin } from '../services/firebase/firebase';
+import { githubOAuthLogin, githubOAuthLogout } from '../services/firebase/firebase';
+
+import { saveItem, removeItem } from '../services/storage/localStorage';
 
 const { actions, reducer } = createSlice({
   name: 'Github-secrets',
@@ -21,31 +23,54 @@ const { actions, reducer } = createSlice({
         userInfo,
       };
     },
+    resetAccessToken(state) {
+      return {
+        ...state,
+        accessToken: '',
+      };
+    },
+    resetUserInfo(state) {
+      return {
+        ...state,
+        userInfo: null,
+      };
+    },
   },
 });
 
 export const {
   setAccessToken,
   setUserInfo,
+  resetAccessToken,
+  resetUserInfo,
 } = actions;
 
 export function login() {
   return async (dispatch) => {
     const response = await githubOAuthLogin();
 
-    if (response !== undefined) {
-      const { accessToken } = response.credential;
-      const { email, photoURL } = response.user;
+    const { accessToken } = response.credential;
 
-      const userInfo = {
-        id: email,
-        img: photoURL,
-      };
+    saveItem('accessToken', accessToken);
 
-      dispatch(setAccessToken(accessToken));
-      dispatch(setUserInfo(userInfo));
-    }
+    const { email, photoURL } = response.user;
+
+    const userInfo = {
+      id: email,
+      img: photoURL,
+    };
+
+    dispatch(setAccessToken(accessToken));
+    dispatch(setUserInfo(userInfo));
   };
 }
+
+export const logout = () => async (dispatch) => {
+  removeItem('accessToken');
+
+  await githubOAuthLogout();
+  dispatch(resetAccessToken());
+  dispatch(resetUserInfo());
+};
 
 export default reducer;

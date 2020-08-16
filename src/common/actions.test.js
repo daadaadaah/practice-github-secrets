@@ -6,6 +6,9 @@ import {
   login,
   setAccessToken,
   setUserInfo,
+  logout,
+  resetAccessToken,
+  resetUserInfo,
 } from './slice';
 
 jest.mock('../services/firebase/firebase.js');
@@ -34,6 +37,27 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setAccessToken(mockAccessToken));
       expect(actions[1]).toEqual(setUserInfo(mockUserInfo));
+    });
+  });
+
+  describe('logout', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'AccessToken',
+        userInfo: {
+          id: 'dev@devlink.com',
+          img: 'https://some-new-url-here',
+        },
+      });
+    });
+
+    it('runs setAccessToken and setUserInfo', async () => {
+      await store.dispatch(logout());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(resetAccessToken());
+      expect(actions[1]).toEqual(resetUserInfo());
     });
   });
 });

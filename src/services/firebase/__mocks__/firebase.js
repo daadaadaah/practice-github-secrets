@@ -21,7 +21,7 @@ const config = {
 
 const githubOAuthLogin = () => new Promise((resolve) => resolve(mockResponse));
 
-const logout = jest.fn();
+const githubOAuthLogout = jest.fn();
 
 const firebase = {
   auth: () => ({
@@ -32,5 +32,5 @@ const firebase = {
 };
 
 export {
-  firebase, config, githubOAuthLogin, logout,
+  firebase, config, githubOAuthLogin, githubOAuthLogout,
 };

@@ -6,8 +6,8 @@ firebase.initializeApp(config);
 
 const githubAuthProvider = new firebase.auth.GithubAuthProvider();
 const githubOAuthLogin = () => firebase.auth().signInWithPopup(githubAuthProvider);
-const logout = () => firebase.auth().signOut();
+const githubOAuthLogout = () => firebase.auth().signOut();
 
 export {
-  firebase, githubAuthProvider, githubOAuthLogin, logout,
+  firebase, githubAuthProvider, githubOAuthLogin, githubOAuthLogout,
 };

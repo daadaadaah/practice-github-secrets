@@ -4,31 +4,79 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { login } from './common/slice';
+import { login, setAccessToken, logout } from './common/slice';
+
+import { loadItem } from './services/storage/localStorage';
 
 import App from './App';
 
 jest.mock('react-redux');
 jest.mock('./common/slice');
 jest.mock('./services/firebase/firebase.js');
+jest.mock('./services/storage/localStorage');
 
-test('<App />', () => {
+describe('<App />', () => {
   const dispatch = jest.fn();
 
-  useDispatch.mockImplementation(() => dispatch);
+  beforeEach(() => {
+    useDispatch.mockImplementation(() => dispatch);
+  });
 
-  useSelector.mockImplementation((selector) => selector({
-    accessToken: '',
-    userInfo: null,
-  }));
+  context('without accessToken', () => {
+    beforeEach(() => {
+      useSelector.mockImplementation((selector) => selector({
+        accessToken: '',
+        userInfo: null,
+      }));
+    });
 
-  const { container, getByText } = render(
-    <App />,
-  );
+    it('show Login button', () => {
+      const { container, getByText } = render(
+        <App />,
+      );
+      expect(dispatch).toBeCalledTimes(0);
 
-  expect(container).toHaveTextContent('Gihtub 로그인 테스트');
+      expect(container).toHaveTextContent('Gihtub 로그인 테스트');
 
-  fireEvent.click(getByText('Login'));
+      fireEvent.click(getByText('Login'));
 
-  expect(dispatch).toBeCalledWith(login());
+      expect(dispatch).toBeCalledWith(login());
+    });
+  });
+
+  context('with accessToken', () => {
+    beforeEach(() => {
+      useSelector.mockImplementation((selector) => selector({
+        accessToken: 'ACCESS_TOKEN',
+        userInfo: {
+          id: 'devlink',
+          img: 'dev@link.com',
+        },
+      }));
+
+      loadItem.mockImplementation(() => 'ACCESS_TOKEN');
+    });
+
+    it('show Logout button', () => {
+      const { container, getByText } = render(
+        <App />,
+      );
+
+      expect(dispatch).toBeCalledWith(setAccessToken('ACCESS_TOKEN'));
+
+      // TODO : Token에 해당하는 유저 정보 DB에서 가져와서 자동 로그인시키기
+
+      expect(container).toHaveTextContent('Gihtub 로그인 테스트');
+
+      expect(container).toHaveTextContent('devlink');
+
+      expect(container).toHaveTextContent('dev@link.com');
+
+      expect(container).toHaveTextContent('Logout');
+
+      fireEvent.click(getByText('Logout'));
+
+      expect(dispatch).toBeCalledWith(logout());
+    });
+  });
 });

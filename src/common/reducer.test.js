@@ -1,4 +1,6 @@
-import reducer, { setAccessToken, setUserInfo } from './slice';
+import reducer, {
+  setAccessToken, setUserInfo, resetAccessToken, resetUserInfo,
+} from './slice';
 
 jest.mock('../services/firebase/firebase.js');
 
@@ -45,6 +47,39 @@ describe('reducer', () => {
       const state = reducer(initialState, setUserInfo(userInfo));
 
       expect(state.userInfo).toEqual(userInfo);
+    });
+  });
+
+  describe('resetAccessToken', () => {
+    it('reset accessToken', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+        userInfo: {
+          id: 'email',
+          img: 'photoURL',
+        },
+
+      };
+
+      const state = reducer(initialState, resetAccessToken());
+
+      expect(state.accessToken).toEqual('');
+    });
+  });
+
+  describe('resetUserInfo', () => {
+    it('reset userInfo', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+        userInfo: {
+          id: 'email',
+          img: 'photoURL',
+        },
+      };
+
+      const state = reducer(initialState, resetUserInfo());
+
+      expect(state.userInfo).toEqual(null);
     });
   });
 });
