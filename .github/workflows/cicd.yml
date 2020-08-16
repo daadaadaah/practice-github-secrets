@@ -24,7 +24,7 @@ jobs:
         run: npm test
         env:
           HEADLESS: true
-      - name: Load API Config
+      - name: Load FIREBASE Config
         run: |
             echo 'FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}' >> config/.env.production
             echo 'FIREBASE_AUTH_DOMAIN=${{ secrets.FIREBASE_AUTH_DOMAIN }}' >> config/.env.production
