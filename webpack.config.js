@@ -6,7 +6,7 @@ module.exports = (env, argv) => ({
   entry: path.resolve(__dirname, 'src/index.jsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: `${argv.mode}_bundle-[hash].js`,
+    filename: 'bundle-[hash].js',
     publicPath: argv.mode === 'development' ? '/' : '/practice-github-secrets',
   },
   module: {
