@@ -51,7 +51,7 @@ export default function App() {
         {userInfo ? userInfo.email : '' }
       </h1>
       <h1>
-        프로필 사진 URL :
+        프사URL :
         {' '}
         {userInfo ? userInfo.photoURL : '' }
       </h1>
