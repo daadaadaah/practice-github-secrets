@@ -53,11 +53,12 @@ export function login() {
 
     saveItem('accessToken', accessToken);
 
-    const { email, photoURL } = response.user;
+    const { email, photoURL, uid } = response.user;
 
     const userInfo = {
-      id: email,
-      img: photoURL,
+      uid,
+      email,
+      photoURL,
     };
 
     dispatch(setAccessToken(accessToken));

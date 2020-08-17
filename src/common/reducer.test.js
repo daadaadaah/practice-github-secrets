@@ -23,7 +23,6 @@ describe('reducer', () => {
       const initialState = {
         accessToken: '',
         userInfo: null,
-
       };
 
       const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
@@ -40,8 +39,9 @@ describe('reducer', () => {
       };
 
       const userInfo = {
-        id: 'email',
-        img: 'photoURL',
+        uid: 'uid',
+        email: 'email',
+        photoURL: 'photoURL',
       };
 
       const state = reducer(initialState, setUserInfo(userInfo));
@@ -55,8 +55,9 @@ describe('reducer', () => {
       const initialState = {
         accessToken: 'ACCESS_TOKEN',
         userInfo: {
-          id: 'email',
-          img: 'photoURL',
+          uid: 'uid',
+          email: 'email',
+          photoURL: 'photoURL',
         },
 
       };
@@ -72,8 +73,9 @@ describe('reducer', () => {
       const initialState = {
         accessToken: 'ACCESS_TOKEN',
         userInfo: {
-          id: 'email',
-          img: 'photoURL',
+          uid: 'uid',
+          email: 'email',
+          photoURL: 'photoURL',
         },
       };
 

@@ -49,8 +49,9 @@ describe('<App />', () => {
       useSelector.mockImplementation((selector) => selector({
         accessToken: 'ACCESS_TOKEN',
         userInfo: {
-          id: 'devlink',
-          img: 'dev@link.com',
+          uid: 'User_uid',
+          email: 'dev@link.com',
+          photoURL: 'http://photo.com',
         },
       }));
 
@@ -68,9 +69,11 @@ describe('<App />', () => {
 
       expect(container).toHaveTextContent('Gihtub 로그인 테스트');
 
-      expect(container).toHaveTextContent('devlink');
+      expect(container).toHaveTextContent('User_uid');
 
       expect(container).toHaveTextContent('dev@link.com');
+
+      expect(container).toHaveTextContent('http://photo.com');
 
       expect(container).toHaveTextContent('Logout');
 

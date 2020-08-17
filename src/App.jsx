@@ -41,14 +41,19 @@ export default function App() {
         {accessToken || ''}
       </h1>
       <h1>
-        ID :
+        UID :
         {' '}
-        {userInfo ? userInfo.id : '' }
+        {userInfo ? userInfo.uid : '' }
+      </h1>
+      <h1>
+        Email :
+        {' '}
+        {userInfo ? userInfo.email : '' }
       </h1>
       <h1>
         프로필 사진 URL :
         {' '}
-        {userInfo ? userInfo.img : '' }
+        {userInfo ? userInfo.photoURL : '' }
       </h1>
       {accessToken
         ? <button type="button" onClick={handleClickLogout}>Logout</button>

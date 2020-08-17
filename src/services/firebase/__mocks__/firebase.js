@@ -1,14 +1,15 @@
-const mockResponse = {
+const mockResponse = { // TODO : fixture
   credential: {
     accessToken: 'AccessToken',
   },
   user: {
+    uid: 'devuid',
     email: 'dev@devlink.com',
     photoURL: 'https://some-new-url-here',
   },
 };
 
-const config = {
+const config = { // TODO : fixture
   apiKey: '',
   authDomain: '',
   projectId: '',
@@ -32,5 +33,5 @@ const firebase = {
 };
 
 export {
-  firebase, config, githubOAuthLogin, githubOAuthLogout,
+  config, githubOAuthLogin, githubOAuthLogout, firebase,
 };

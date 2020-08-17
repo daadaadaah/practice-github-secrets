@@ -26,8 +26,9 @@ describe('actions', () => {
     const mockAccessToken = 'AccessToken';
 
     const mockUserInfo = {
-      id: 'dev@devlink.com',
-      img: 'https://some-new-url-here',
+      uid: 'devuid',
+      email: 'dev@devlink.com',
+      photoURL: 'https://some-new-url-here',
     };
 
     it('runs setAccessToken and setUserInfo', async () => {
@@ -45,8 +46,9 @@ describe('actions', () => {
       store = mockStore({
         accessToken: 'AccessToken',
         userInfo: {
-          id: 'dev@devlink.com',
-          img: 'https://some-new-url-here',
+          uid: 'user_uid',
+          email: 'dev@devlink.com',
+          photoURL: 'https://some-new-url-here',
         },
       });
     });
