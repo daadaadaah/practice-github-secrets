@@ -41,6 +41,16 @@ export default function App() {
         {accessToken || ''}
       </h1>
       <h1>
+        BASE_PATH :
+        {' '}
+        {process.env.BASE_PATH}
+      </h1>
+      <h1>
+        API_URL :
+        {' '}
+        {process.env.API_URL}
+      </h1>
+      <h1>
         UID :
         {' '}
         {userInfo ? userInfo.uid : '' }

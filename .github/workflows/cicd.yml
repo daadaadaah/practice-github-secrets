@@ -9,7 +9,6 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x]
-
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -26,6 +25,8 @@ jobs:
           HEADLESS: true
       - name: Load FIREBASE Config
         run: |
+            echo 'BASE_PATH=/practice-github-secrets' >> config/.env.production
+            echo 'API_URL=https://us-central1-devlinktag.cloudfunctions.net/app/api/' >> config/.env.production
             echo 'FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}' >> config/.env.production
             echo 'FIREBASE_AUTH_DOMAIN=${{ secrets.FIREBASE_AUTH_DOMAIN }}' >> config/.env.production
             echo 'FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}' >> config/.env.production
