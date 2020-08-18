@@ -51,6 +51,11 @@ export default function App() {
         {process.env.API_URL}
       </h1>
       <h1>
+        AUTH_DOMAIN :
+        {' '}
+        {process.env.FIREBASE_AUTH_DOMAIN}
+      </h1>
+      <h1>
         UID :
         {' '}
         {userInfo ? userInfo.uid : '' }
