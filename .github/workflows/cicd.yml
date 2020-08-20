@@ -97,7 +97,9 @@ jobs:
                   auth_provider_x509_cert_url: $auth_provider_x509_cert_url, 
                   client_x509_cert_url: $client_x509_cert_url 
               }' > devConfig.json
-              cd functions
+        - name: Enter functions
+          run: |
+            cd functions
         - name: Deploy Firebase functions
           if: github.ref == 'refs/heads/master'        
           uses: w9jds/firebase-action@master
