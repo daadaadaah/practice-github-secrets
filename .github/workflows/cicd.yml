@@ -56,7 +56,6 @@ jobs:
       runs-on: ubuntu-latest
       env:
         CI: true
-        working-directory: functions
       strategy:
         matrix:
           node-version: [12.x]
@@ -97,9 +96,6 @@ jobs:
                   auth_provider_x509_cert_url: $auth_provider_x509_cert_url, 
                   client_x509_cert_url: $client_x509_cert_url 
               }' > devConfig.json
-        - name: Enter functions
-          run: |
-            cd functions
         - name: Deploy Firebase functions
           if: github.ref == 'refs/heads/master'        
           uses: w9jds/firebase-action@master
