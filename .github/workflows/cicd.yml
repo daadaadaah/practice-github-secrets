@@ -51,7 +51,7 @@ jobs:
         with:
           BASE_BRANCH: master
           BRANCH: gh-pages
-          FOLDER: dist
+          FOLDER: client/dist
   server-build:
       runs-on: ubuntu-latest
       env:
@@ -100,6 +100,7 @@ jobs:
         - name: Deploy Firebase functions
           if: github.ref == 'refs/heads/master'        
           uses: w9jds/firebase-action@master
+          working-directory: functions
           with:
             args: deploy --only functions
           env:
