@@ -19,14 +19,18 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
+        working-directory: client
         run: npm ci
       - name: Lint
+        working-directory: client
         run: npm run lint
       - name: Test
+        working-directory: client
         run: npm test
         env:
           HEADLESS: true
       - name: Load FIREBASE Config
+        working-directory: client
         run: |
             echo 'BASE_PATH=/practice-github-secrets' >> config/.env.production
             echo 'API_URL=${{ secrets.FIREBASE_FUNCTIONS_API_URL }}' >> config/.env.production
@@ -38,9 +42,11 @@ jobs:
             echo 'FIREBASE_MEASUREMENT_ID=${{ secrets.FIREBASE_MEASUREMENT_ID }}' >> config/.env.production
             echo 'FIREBASE_DATABASE_URL=${{ secrets.FIREBASE_DATABASE_URL }}' >> config/.env.production
       - name: Build
+        working-directory: client
         run: |
           npm run build
       - name: Deploy
+        working-directory: client
         if: github.ref == 'refs/heads/master'
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
