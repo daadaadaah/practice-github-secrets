@@ -46,7 +46,6 @@ jobs:
         run: |
           npm run build
       - name: Deploy
-        working-directory: client
         if: github.ref == 'refs/heads/master'
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
