@@ -32,7 +32,7 @@ export default function App() {
   return (
     <>
       <h1>
-        Gihtub 로그인 테스트
+        Gihtub 로그인 테스트(통합)
       </h1>
       <h1>
         Token :
