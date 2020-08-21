@@ -1,15 +1,18 @@
-const mockResponse = { // TODO : fixture
+const mockResponse = {
+  // TODO : fixture
   credential: {
-    accessToken: 'AccessToken',
+    accessToken: 'GITHUB_ACCESS_TOKEN',
   },
   user: {
     uid: 'devuid',
     email: 'dev@devlink.com',
     photoURL: 'https://some-new-url-here',
+    getIdToken: jest.fn().mockResolvedValue('FIREBASE_ACCESS_TOKEN'),
   },
 };
 
-const config = { // TODO : fixture
+const config = {
+  // TODO : fixture
   apiKey: '',
   authDomain: '',
   projectId: '',

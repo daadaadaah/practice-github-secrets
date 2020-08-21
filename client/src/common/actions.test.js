@@ -12,6 +12,7 @@ import {
 } from './slice';
 
 jest.mock('../services/firebase/firebase.js');
+jest.mock('../services/api/api.js');
 
 const mockStore = configureStore(getDefaultMiddleware());
 
@@ -23,7 +24,10 @@ describe('actions', () => {
       store = mockStore({});
     });
 
-    const mockAccessToken = 'AccessToken';
+    const mockAccessToken = {
+      github: 'GITHUB_ACCESS_TOKEN',
+      firebase: 'FIREBASE_ACCESS_TOKEN',
+    };
 
     const mockUserInfo = {
       uid: 'devuid',
@@ -44,7 +48,10 @@ describe('actions', () => {
   describe('logout', () => {
     beforeEach(() => {
       store = mockStore({
-        accessToken: 'AccessToken',
+        accessToken: {
+          github: 'GITHUB_ACCESS_TOKEN',
+          firebase: 'FIREBASE_ACCESS_TOKEN',
+        },
         userInfo: {
           uid: 'user_uid',
           email: 'dev@devlink.com',

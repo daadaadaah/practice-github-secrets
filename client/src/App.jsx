@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { login, setAccessToken, logout } from './common/slice';
+import { login, logout } from './common/slice';
 
 import { loadItem } from './services/storage/localStorage';
 
@@ -13,13 +13,14 @@ export default function App() {
 
   const localToken = loadItem('accessToken');
 
-  if (localToken) {
-    // TODO : Token에 해당하는 유저 정보 DB에서 가져와서 자동 로그인시키기
-    dispatch(setAccessToken(localToken));
-  }
-
   const accessToken = useSelector(get('accessToken'));
+
   const userInfo = useSelector(get('userInfo'));
+
+  // if (localToken && !userInfo) { // TODO : Token 이 이미 있을 경우, 자동 로그인
+
+  //   dispatch(autoLogin(localToken)); // TODO : 토큰 관리 방법 논의 후 구현 예정
+  // }
 
   const handleClickLogin = () => {
     dispatch(login());
@@ -31,14 +32,16 @@ export default function App() {
 
   return (
     <>
+      <h1>Github 로그인 테스트(통합1)</h1>
       <h1>
-        Gihtub 로그인 테스트(통합1)
+        Github Token :
+        {' '}
+        {accessToken?.github || ''}
       </h1>
       <h1>
-        Token :
+        Firebase Token :
         {' '}
-
-        {accessToken || ''}
+        {accessToken?.firebase || ''}
       </h1>
       <h1>
         BASE_PATH :
@@ -58,22 +61,27 @@ export default function App() {
       <h1>
         UID :
         {' '}
-        {userInfo ? userInfo.uid : '' }
+        {userInfo?.uid || ''}
       </h1>
       <h1>
         Email :
         {' '}
-        {userInfo ? userInfo.email : '' }
+        {userInfo?.email || ''}
       </h1>
       <h1>
         프사URL :
         {' '}
-        {userInfo ? userInfo.photoURL : '' }
+        {userInfo?.photoURL || ''}
       </h1>
-      {accessToken
-        ? <button type="button" onClick={handleClickLogout}>Logout</button>
-        : <button type="button" onClick={handleClickLogin}>Login</button>}
-
+      {localToken ? (
+        <button type="button" onClick={handleClickLogout}>
+          Logout
+        </button>
+      ) : (
+        <button type="button" onClick={handleClickLogin}>
+          Login
+        </button>
+      )}
     </>
   );
 }

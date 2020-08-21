@@ -7,7 +7,7 @@ jest.mock('../services/firebase/firebase.js');
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
-      accessToken: '',
+      accessToken: null,
       userInfo: null,
     };
 
@@ -21,20 +21,26 @@ describe('reducer', () => {
   describe('setAccessToken', () => {
     it('set accessToken', () => {
       const initialState = {
-        accessToken: '',
+        accessToken: null,
         userInfo: null,
       };
 
-      const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
+      const state = reducer(initialState, setAccessToken({
+        github: 'GITHUB_ACCESS_TOKEN',
+        firebase: 'FIREBASE_ACCESS_TOKEN',
+      }));
 
-      expect(state.accessToken).toEqual('ACCESS_TOKEN');
+      expect(state.accessToken).toEqual({
+        github: 'GITHUB_ACCESS_TOKEN',
+        firebase: 'FIREBASE_ACCESS_TOKEN',
+      });
     });
   });
 
   describe('setUserInfo', () => {
     it('set userInfo', () => {
       const initialState = {
-        accessToken: '',
+        accessToken: null,
         userInfo: null,
       };
 
@@ -53,7 +59,10 @@ describe('reducer', () => {
   describe('resetAccessToken', () => {
     it('reset accessToken', () => {
       const initialState = {
-        accessToken: 'ACCESS_TOKEN',
+        accessToken: {
+          github: 'GITHUB_ACCESS_TOKEN',
+          firebase: 'FIREBASE_ACCESS_TOKEN',
+        },
         userInfo: {
           uid: 'uid',
           email: 'email',
@@ -64,14 +73,17 @@ describe('reducer', () => {
 
       const state = reducer(initialState, resetAccessToken());
 
-      expect(state.accessToken).toEqual('');
+      expect(state.accessToken).toEqual(null);
     });
   });
 
   describe('resetUserInfo', () => {
     it('reset userInfo', () => {
       const initialState = {
-        accessToken: 'ACCESS_TOKEN',
+        accessToken: {
+          github: 'GITHUB_ACCESS_TOKEN',
+          firebase: 'FIREBASE_ACCESS_TOKEN',
+        },
         userInfo: {
           uid: 'uid',
           email: 'email',
