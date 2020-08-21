@@ -5,4 +5,4 @@ const auth = {
   signup: jest.fn(),
 };
 
-export default auth;
+module.exports = auth;

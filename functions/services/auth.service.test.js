@@ -1,6 +1,6 @@
-import auth from './auth.service';
+const auth = require('./auth.service');
 
-import userRepository from '../repositories/user.repository';
+const userRepository = require('../repositories/user.repository');
 
 jest.mock('../repositories/user.repository');
 

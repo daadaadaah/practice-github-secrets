@@ -3,4 +3,4 @@ const userRepository = {
   findByUid: jest.fn(),
 };
 
-export default userRepository;
+module.exports = userRepository;

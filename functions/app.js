@@ -1,15 +1,15 @@
-import express from "express";
+const express = require('express');
 
-import cors from 'cors';
+const cors = require('cors');
 
-import hellowordRouter from './routes/helloword.route';
-import authRouter from './routes/auth.route';
+const hellowordRouter = require('./routes/helloword.route');
+const authRouter = require('./routes/auth.route');
 
 const app = express();
 app.use(express.json());
 
-app.use( cors( { origin: true }));
+app.use(cors({ origin: true }));
 app.use('/hello-world', hellowordRouter);
-app.use("/auth", authRouter);
+app.use('/auth', authRouter);
 
-export default app;
+module.exports = app;

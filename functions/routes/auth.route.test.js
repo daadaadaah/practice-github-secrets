@@ -1,8 +1,8 @@
-import request from 'supertest';
+const request = require( 'supertest');
 
-import app from '../app';
+const app = require( '../app');
 
-import auth from '../services/auth.service';
+const auth = require( '../services/auth.service');
 
 jest.mock('../services/auth.service');
 
@@ -60,8 +60,6 @@ describe('/auth', () => {
           email: user.email,
           photoURL: user.photoURL,
         });
-
-        // console.log("response : ", response);
 
         expect(response.status).toBe(201);
         expect(response.body).toEqual({

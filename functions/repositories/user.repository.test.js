@@ -1,4 +1,4 @@
-import userRepository from './user.repository';
+const userRepository =  require('./user.repository');
 
 jest.mock('firebase-admin', () => ({
   initializeApp: jest.fn().mockImplementation(() => jest.fn()),

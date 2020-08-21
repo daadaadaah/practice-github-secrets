@@ -1,4 +1,4 @@
-import userRepository from '../repositories/user.repository.js';
+const userRepository = require('../repositories/user.repository');
 
 const auth = {
   async login(uid) {
@@ -12,4 +12,4 @@ const auth = {
   },
 };
 
-export default auth;
+module.exports =  auth;

@@ -1,4 +1,4 @@
-import db from '../database';
+const db = require('../database');
 
 const userRepository = {
   async findByUid(uid) {
@@ -11,4 +11,4 @@ const userRepository = {
 
 };
 
-export default userRepository;
+module.exports = userRepository;
