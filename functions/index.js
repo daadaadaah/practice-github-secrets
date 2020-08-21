@@ -2,4 +2,6 @@ import functions from 'firebase-functions';
 
 import app from './app';
 
-exports.api = functions.https.onRequest(app);
+const api = functions.https.onRequest(app);
+
+export default api;
