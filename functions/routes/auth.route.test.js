@@ -30,12 +30,9 @@ describe('/auth', () => {
 
         expect(response.status).toBe(201);
         expect(response.body).toEqual({
-          message: 'login successfully',
-          body: {
-            uid: user.uid,
-            email: user.email,
-            photoURL: user.photoURL,
-          },
+          uid: user.uid,
+          email: user.email,
+          photoURL: user.photoURL,
         });
       });
     });
@@ -63,12 +60,9 @@ describe('/auth', () => {
 
         expect(response.status).toBe(201);
         expect(response.body).toEqual({
-          message: 'signup successfully',
-          body: {
-            uid: newUser.uid,
-            email: newUser.email,
-            photoURL: newUser.photoURL,
-          },
+          uid: newUser.uid,
+          email: newUser.email,
+          photoURL: newUser.photoURL,
         });
       });
     });
